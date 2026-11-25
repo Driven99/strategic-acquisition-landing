@@ -509,6 +509,18 @@
             left: 20%;
             animation-delay: 4s;
         }
+        /* Review-only newsletter component; independent of existing checkout styling. */
+        .mv-signup { padding: 3rem 1rem; background: #f7f7f7; color: #17212c; }
+        .mv-signup-inner { max-width: 680px; margin: 0 auto; }
+        .mv-signup h2 { font-size: clamp(1.4rem, 4vw, 2rem); margin-bottom: .75rem; }
+        .mv-signup fieldset { border: 0; padding: 0; margin: 1rem 0 0; min-width: 0; }
+        .mv-signup label { display: block; margin: .75rem 0 .35rem; }
+        .mv-signup input[type=email] { box-sizing: border-box; width: 100%; padding: .8rem; border: 1px solid #64748b; border-radius: 6px; font: inherit; }
+        .mv-signup .mv-consent { display: flex; align-items: flex-start; gap: .5rem; }
+        .mv-signup input[type=checkbox] { flex: none; margin-top: .35em; }
+        .mv-signup button { max-width: 100%; white-space: normal; margin-top: .75rem; }
+        .mv-signup :focus-visible { outline: 3px solid #9a530b; outline-offset: 3px; }
+        .mv-signup-status { margin-top: .75rem; }
     </style>
 </head>
 <body>
@@ -674,6 +686,22 @@
                 </div>
             </div>
         </section>
+        <section class="mv-signup" aria-labelledby="mv-signup-title">
+            <div class="mv-signup-inner">
+                <h2 id="mv-signup-title">Get practical business acquisition insights</h2>
+                <p>Receive occasional resources on evaluating business opportunities, seller financing, due diligence, and acquisition strategies.</p>
+                <p id="mv-signup-notice"><strong>Preview only:</strong> Email signup is not available yet. Please do not enter real contact information.</p>
+                <form id="mv-signup-form" aria-describedby="mv-signup-notice" novalidate>
+                    <fieldset disabled id="mv-signup-fields">
+                        <label for="mv-signup-email">Email address</label>
+                        <input id="mv-signup-email" type="email" required autocomplete="off" maxlength="254">
+                        <label class="mv-consent" for="mv-signup-consent"><input id="mv-signup-consent" type="checkbox" required> I agree to receive occasional marketing emails from Monetized Vault.</label>
+                        <button type="submit" class="btn btn-primary">Send me updates</button>
+                    </fieldset>
+                </form>
+                <p id="mv-signup-status" class="mv-signup-status" role="status" aria-live="polite"></p>
+            </div>
+        </section>
     </main>
 
     <script>
@@ -772,6 +800,30 @@
             }
         `;
         document.head.appendChild(style);
+    </script>
+    <script>
+    (() => {
+        const form = document.getElementById('mv-signup-form');
+        const fields = document.getElementById('mv-signup-fields');
+        const email = document.getElementById('mv-signup-email');
+        const consent = document.getElementById('mv-signup-consent');
+        const status = document.getElementById('mv-signup-status');
+        if (!form || !fields || !email || !consent || !status) return;
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            if (!email.validity.valid) {
+                status.textContent = 'Enter a valid email address for the preview.';
+                email.focus(); return;
+            }
+            if (!consent.checked) {
+                status.textContent = 'Select the consent checkbox to continue the preview.';
+                consent.focus(); return;
+            }
+            form.reset();
+            status.textContent = 'Signup is unavailable. Nothing was submitted or saved.';
+        });
+        fields.disabled = false;
+    })();
     </script>
 </body>
 </html>
