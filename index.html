@@ -738,7 +738,7 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
-                if (href === '#') return; // Native return to top.
+                if (href === '#' || this.classList.contains('skip-link')) return; // Preserve native skip-link focus and fragment.
                 const target = document.getElementById(href.slice(1));
                 if (!target) return;
                 e.preventDefault();
