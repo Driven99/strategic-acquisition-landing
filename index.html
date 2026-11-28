@@ -734,19 +734,6 @@
     </main>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href === '#' || this.classList.contains('skip-link')) return; // Preserve native skip-link focus and fragment.
-                const target = document.getElementById(href.slice(1));
-                if (!target) return;
-                e.preventDefault();
-                const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-            });
-        });
-
         // Header background on scroll
         let lastScroll = 0;
         window.addEventListener('scroll', () => {
