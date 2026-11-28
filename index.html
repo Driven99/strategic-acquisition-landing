@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Complete Corporation Acquisition Guide - Master Corporate M&A</title>
+    <title>Corporation Acquisition Guide | Monetized Vault</title>
+    <meta name="description" content="Explore business acquisition concepts, due diligence, financing considerations and integration planning with Monetized Vault.">
     <style>
         * {
             margin: 0;
@@ -467,21 +468,30 @@
                 flex-direction: column;
             }
 
-            .nav-links {
-                display: none;
+            header { position: static; }
+            .header-content { flex-direction: column; align-items: flex-start; gap: .75rem; }
+            .nav-links { flex-wrap: wrap; gap: .5rem 1rem; }
+            .hero { padding-top: 3rem; }
+            .features-grid { grid-template-columns: minmax(0, 1fr); }
+            .hero-content > *, .benefits-content > * { min-width: 0; }
+            .cta-buttons .btn { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+        }
+
+        /* Content remains readable if scripts or intersection observers fail. */
+        .fade-in { opacity: 1; transform: none; }
+        section[id] { scroll-margin-top: 6rem; }
+        a:focus-visible, button:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+        @media (max-width: 768px) { section[id] { scroll-margin-top: 1rem; } }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
             }
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+            .hero-title, .hero-subtitle, .hero-description, .cta-buttons, .hero-book, .fade-in {
+                opacity: 1 !important;
+                transform: none !important;
+            }
         }
 
         /* Floating Elements */
@@ -509,9 +519,39 @@
             left: 20%;
             animation-delay: 4s;
         }
+        /* Review-only newsletter component; independent of existing checkout styling. */
+        .mv-signup { padding: 3rem 1rem; background: #f7f7f7; color: #17212c; }
+        .mv-signup-inner { max-width: 680px; margin: 0 auto; }
+        .mv-signup h2 { font-size: clamp(1.4rem, 4vw, 2rem); margin-bottom: .75rem; }
+        .mv-signup fieldset { border: 0; padding: 0; margin: 1rem 0 0; min-width: 0; }
+        .mv-signup label { display: block; margin: .75rem 0 .35rem; }
+        .mv-signup input[type=email] { box-sizing: border-box; width: 100%; padding: .8rem; border: 1px solid #64748b; border-radius: 6px; font: inherit; }
+        .mv-signup .mv-consent { display: flex; align-items: flex-start; gap: .5rem; }
+        .mv-signup input[type=checkbox] { flex: none; margin-top: .35em; }
+        .mv-signup button { max-width: 100%; white-space: normal; margin-top: .75rem; }
+        .mv-signup :focus-visible { outline: 3px solid #9a530b; outline-offset: 3px; }
+        .mv-signup-status { margin-top: .75rem; }
+        /* LMAE-QA07: review-only accessibility corrections. */
+        body, .hero { background: linear-gradient(135deg, #4659b7 0%, #62408a 100%); }
+        .hero-title, .hero-subtitle, .hero-description, .cta-buttons, .hero-book {
+            opacity: 1; transform: none; animation: none;
+        }
+        .hero::before, .cta-section::before, .floating-icon { animation: none; }
+        .btn-primary, .cta-section { color: #17212c; }
+        .cta-subtitle, .cta-content > p { opacity: 1 !important; }
+        .cta-section .btn { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+        .cta-section .price { font-size: clamp(1.4rem, 5vw, 3rem); overflow-wrap: anywhere; }
+        .cover-note { color: #fff; margin-top: .75rem; font-size: .9rem; }
+        .skip-link { position: fixed; top: .5rem; left: .5rem; z-index: 2000; padding: .75rem; background: #fff; color: #17212c; transform: translateY(-200%); }
+        .skip-link:focus { transform: none; }
+        #main-content { scroll-margin-top: 6rem; }
+        @media (max-width: 768px) { #main-content { scroll-margin-top: 1rem; } }
+        a:focus-visible, button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; box-shadow: 0 0 0 6px #17212c; }
+        .nav-links a:hover { color: #4659b7; }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <header>
         <div class="container">
             <div class="header-content">
@@ -519,7 +559,7 @@
                 <nav>
                     <ul class="nav-links">
                         <li><a href="#features">What's Inside</a></li>
-                        <li><a href="#benefits">Results</a></li>
+                        <li><a href="#benefits">Deal considerations</a></li>
                         <li><a href="#download">Get Guide</a></li>
                     </ul>
                 </nav>
@@ -527,7 +567,7 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <section class="hero">
             <div class="floating-icon">💼</div>
             <div class="floating-icon">📈</div>
@@ -537,17 +577,18 @@
                 <div class="hero-content">
                     <div class="hero-text">
                         <h1 class="hero-title">The Complete Corporation Acquisition Guide</h1>
-                        <p class="hero-subtitle">The Insider's Blueprint to Building Wealth Through Strategic Corporate Acquisitions</p>
+                        <p class="hero-subtitle">An Educational Guide to Strategic Business Acquisitions</p>
                         <p class="hero-description">
-                            Master the $2.3 billion industry that smart money uses to build generational wealth. Learn the systematic 7-step acquisition framework, business credit acceleration protocols, and roll-up strategies that serious wealth builders use to compress 3+ years of traditional business building into 90-120 days.
+                            Explore a structured approach to evaluating business acquisitions, financing options, due diligence and post-acquisition planning.
                         </p>
                         <div class="cta-buttons">
-                            <a href="https://stan.store/Monetized-Vault" class="btn btn-primary">Get Complete Guide Now</a>
+                            <a href="#download" class="btn btn-primary">View guide information</a>
                             <a href="#features" class="btn btn-secondary">See What's Inside</a>
                         </div>
                     </div>
                     <div class="hero-book">
-                        <img src="data:image/svg+xml,%3Csvg width='300' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='300' height='400' fill='%23f8f9fa' stroke='%23dee2e6' stroke-width='2' rx='10'/%3E%3Ctext x='150' y='40' text-anchor='middle' fill='%232c3e50' font-family='Arial' font-size='16' font-weight='bold'%3EThe Complete%3C/text%3E%3Ctext x='150' y='60' text-anchor='middle' fill='%232c3e50' font-family='Arial' font-size='16' font-weight='bold'%3ECorporation%3C/text%3E%3Ctext x='150' y='80' text-anchor='middle' fill='%232c3e50' font-family='Arial' font-size='16' font-weight='bold'%3EAcquisition Guide%3C/text%3E%3Ctext x='150' y='120' text-anchor='middle' fill='%23666' font-family='Arial' font-size='12'%3EThe Insider's Blueprint to%3C/text%3E%3Ctext x='150' y='135' text-anchor='middle' fill='%23666' font-family='Arial' font-size='12'%3EBuilding Wealth Through%3C/text%3E%3Ctext x='150' y='150' text-anchor='middle' fill='%23666' font-family='Arial' font-size='12'%3EStrategic Corporate Acquisitions%3C/text%3E%3Ctext x='150' y='320' text-anchor='middle' fill='%23666' font-family='Arial' font-size='10'%3EMonetized Vault™ Professional Series%3C/text%3E%3Ctext x='150' y='340' text-anchor='middle' fill='%23666' font-family='Arial' font-size='10'%3E2025 Edition • 120+ Pages%3C/text%3E%3Ctext x='150' y='360' text-anchor='middle' fill='%23666' font-family='Arial' font-size='10'%3ETemplates • Checklists • Case Studies%3C/text%3E%3C/svg%3E" alt="The Complete Corporation Acquisition Guide" class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg width='300' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='300' height='400' fill='%23f8f9fa' stroke='%23dee2e6' stroke-width='2' rx='10'/%3E%3Ctext x='150' y='40' text-anchor='middle' fill='%232c3e50' font-family='Arial' font-size='16' font-weight='bold'%3EThe Complete%3C/text%3E%3Ctext x='150' y='60' text-anchor='middle' fill='%232c3e50' font-family='Arial' font-size='16' font-weight='bold'%3ECorporation%3C/text%3E%3Ctext x='150' y='80' text-anchor='middle' fill='%232c3e50' font-family='Arial' font-size='16' font-weight='bold'%3EAcquisition Guide%3C/text%3E%3Ctext x='150' y='120' text-anchor='middle' fill='%23666' font-family='Arial' font-size='12'%3EAn Educational Guide to%3C/text%3E%3Ctext x='150' y='135' text-anchor='middle' fill='%23666' font-family='Arial' font-size='12'%3EBusiness Acquisitions%3C/text%3E%3Ctext x='150' y='150' text-anchor='middle' fill='%23666' font-family='Arial' font-size='12'%3EStrategic Corporate Acquisitions%3C/text%3E%3Ctext x='150' y='320' text-anchor='middle' fill='%23666' font-family='Arial' font-size='10'%3EMonetized Vault™ Professional Series%3C/text%3E%3Ctext x='150' y='340' text-anchor='middle' fill='%23666' font-family='Arial' font-size='10'%3EEducational guide preview%3C/text%3E%3Ctext x='150' y='360' text-anchor='middle' fill='%23666' font-family='Arial' font-size='10'%3EAcquisition education%3C/text%3E%3C/svg%3E" alt="Illustrative cover mockup for the Corporation Acquisition Guide" class="book-cover">
+                        <p class="cover-note">Illustrative cover mockup; final edition artwork may differ.</p>
                     </div>
                 </div>
             </div>
@@ -556,43 +597,43 @@
         <section class="features" id="features">
             <div class="container">
                 <h2 class="section-title fade-in">The Complete System Inside</h2>
-                <p class="section-subtitle fade-in">6 comprehensive parts covering everything from deal sourcing to exit strategies</p>
+                <p class="section-subtitle fade-in">Topics to explore, from deal sourcing to exit planning</p>
                 
                 <div class="features-grid">
                     <div class="feature-card fade-in">
                         <div class="feature-icon">🎯</div>
-                        <h3 class="feature-title">The 7-Step Acquisition System</h3>
-                        <p class="feature-description">Complete framework for identifying, evaluating, and executing corporate acquisitions with 15-point due diligence that prevents disasters.</p>
+                        <h3 class="feature-title">Acquisition Process</h3>
+                        <p class="feature-description">Consider steps for identifying opportunities, evaluating risks and preparing for due diligence.</p>
                     </div>
                     
                     <div class="feature-card fade-in">
                         <div class="feature-icon">⚡</div>
-                        <h3 class="feature-title">90-Day Credit Building Protocol</h3>
-                        <p class="feature-description">Leverage corporate age to achieve 5-6 figure business credit portfolios in 90-120 days instead of the typical 18-36 months.</p>
+                        <h3 class="feature-title">Business Credit Considerations</h3>
+                        <p class="feature-description">Explore business credit factors and lender requirements; approval and timing vary.</p>
                     </div>
                     
                     <div class="feature-card fade-in">
                         <div class="feature-icon">🏦</div>
-                        <h3 class="feature-title">The Montana Banking Advantage</h3>
-                        <p class="feature-description">Why smart money chooses Montana corporations for 40% higher credit approval rates and superior banking relationships.</p>
+                        <h3 class="feature-title">Entity and Banking Considerations</h3>
+                        <p class="feature-description">Consider jurisdiction, banking requirements and compliance obligations when evaluating an entity.</p>
                     </div>
                     
                     <div class="feature-card fade-in">
                         <div class="feature-icon">💰</div>
                         <h3 class="feature-title">Creative Financing Strategies</h3>
-                        <p class="feature-description">Acquire with minimal capital using seller financing, asset-based financing, and SBA programs that reduce initial investment by 60-80%.</p>
+                        <p class="feature-description">Compare seller financing, asset-based financing and SBA-backed financing; eligibility and terms vary.</p>
                     </div>
                     
                     <div class="feature-card fade-in">
                         <div class="feature-icon">📊</div>
-                        <h3 class="feature-title">Roll-Up Wealth Multiplication</h3>
-                        <p class="feature-description">Private equity strategies for individual investors: buy at 3-4x EBITDA, consolidate, and exit at 8-12x EBITDA for massive returns.</p>
+                        <h3 class="feature-title">Roll-Up Strategies</h3>
+                        <p class="feature-description">Explore consolidation strategies, valuation considerations and integration risks.</p>
                     </div>
                     
                     <div class="feature-card fade-in">
                         <div class="feature-icon">🚀</div>
-                        <h3 class="feature-title">Complete Implementation Resources</h3>
-                        <p class="feature-description">Legal documents, templates, checklists, vendor selection guides, and real case studies worth $2.1M+ in documented returns.</p>
+                        <h3 class="feature-title">Implementation Planning</h3>
+                        <p class="feature-description">Consider practical planning steps, documentation needs and professional review.</p>
                     </div>
                 </div>
             </div>
@@ -602,49 +643,49 @@
             <div class="container">
                 <div class="benefits-content">
                     <div class="benefits-text fade-in">
-                        <h2 class="section-title">Proven Results from Real Transactions</h2>
-                        <p class="section-subtitle">Based on analysis of 200+ transactions worth $47M+ in deal volume</p>
+                        <h2 class="section-title">Questions to Evaluate Before a Deal</h2>
+                        <p class="section-subtitle">Educational information, not a promise of financing approval or investment performance.</p>
                         
                         <ul class="benefits-list">
                             <li>
                                 <div class="check-icon">✓</div>
-                                <span>87% faster business credit establishment vs. starting from scratch</span>
+                                <span>What financial statements and obligations should you review?</span>
                             </li>
                             <li>
                                 <div class="check-icon">✓</div>
-                                <span>40-60% higher initial credit limits using corporate age advantage</span>
+                                <span>What credit factors and collateral will lenders assess?</span>
                             </li>
                             <li>
                                 <div class="check-icon">✓</div>
-                                <span>6-10x faster results than traditional business formation</span>
+                                <span>What timeline is realistic for due diligence and closing?</span>
                             </li>
                             <li>
                                 <div class="check-icon">✓</div>
-                                <span>25-35% reduction in personal guarantee requirements</span>
+                                <span>What guarantees and other obligations may be required?</span>
                             </li>
                             <li>
                                 <div class="check-icon">✓</div>
-                                <span>Complete roll-up case study: $45K investment → $2.1M return in 5 years</span>
+                                <span>What risks could affect integration, cash flow and exit value?</span>
                             </li>
                         </ul>
                     </div>
                     
                     <div class="stats-grid fade-in">
                         <div class="stat-card">
-                            <div class="stat-number">200+</div>
-                            <div class="stat-label">Successful Transactions Analyzed</div>
+                            <div class="stat-number">01</div>
+                            <div class="stat-label">Deal sourcing</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number">$47M+</div>
-                            <div class="stat-label">Total Deal Volume Experience</div>
+                            <div class="stat-number">02</div>
+                            <div class="stat-label">Due diligence</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number">120+</div>
-                            <div class="stat-label">Pages of Expert Implementation</div>
+                            <div class="stat-number">03</div>
+                            <div class="stat-label">Financing</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number">18</div>
-                            <div class="stat-label">Complete Chapters + Case Studies</div>
+                            <div class="stat-number">04</div>
+                            <div class="stat-label">Integration planning</div>
                         </div>
                     </div>
                 </div>
@@ -654,61 +695,45 @@
         <section class="cta-section" id="download">
             <div class="container">
                 <div class="cta-content">
-                    <h2 class="cta-title">Ready to Master Corporate Acquisition?</h2>
-                    <p class="cta-subtitle">Join the smart money using systematic acquisition strategies to build generational wealth</p>
+                    <h2 class="cta-title">Explore the Corporation Acquisition Guide</h2>
+                    <p class="cta-subtitle">Review the available product and its current terms before purchasing.</p>
                     
                     <div class="price">
-                        <span class="price-old">$197</span>
-                        <span>$97</span>
+                        <span>Price and availability pending verification</span>
+                        
                     </div>
                     
                     <div class="cta-buttons">
-                        <a href="https://stan.store/Monetized-Vault" class="btn btn-primary" style="background: white; color: #e67e22; font-size: 1.2rem; padding: 1.2rem 3rem;">
-                            Get Complete Guide Now - Limited Time
+                        <a href="https://stan.store/Monetized-Vault" class="btn btn-primary" style="background: white; color: #8a4100; font-size: 1.2rem; padding: 1.2rem 3rem;">
+                            Visit Monetized Vault storefront
                         </a>
                     </div>
                     
                     <p style="margin-top: 1rem; opacity: 0.8; font-size: 0.9rem;">
-                        ✓ Instant Download ✓ 30-Day Money Back Guarantee ✓ Complete Implementation System
+                        Confirm the product, price, delivery and refund terms on the seller platform before purchase.
                     </p>
                 </div>
+            </div>
+        </section>
+        <section class="mv-signup" aria-labelledby="mv-signup-title">
+            <div class="mv-signup-inner">
+                <h2 id="mv-signup-title">Get practical business acquisition insights</h2>
+                <p>Receive occasional resources on evaluating business opportunities, seller financing, due diligence, and acquisition strategies.</p>
+                <p id="mv-signup-notice"><strong>Preview only:</strong> Email signup is not available yet. Please do not enter real contact information.</p>
+                <form id="mv-signup-form" aria-describedby="mv-signup-notice" novalidate>
+                    <fieldset disabled id="mv-signup-fields">
+                        <label for="mv-signup-email">Email address</label>
+                        <input id="mv-signup-email" type="email" required autocomplete="off" maxlength="254">
+                        <label class="mv-consent" for="mv-signup-consent"><input id="mv-signup-consent" type="checkbox" required> I agree to receive occasional marketing emails from Monetized Vault.</label>
+                        <button type="submit" class="btn btn-primary">Send me updates</button>
+                    </fieldset>
+                </form>
+                <p id="mv-signup-status" class="mv-signup-status" role="status" aria-live="polite"></p>
             </div>
         </section>
     </main>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
         // Header background on scroll
         let lastScroll = 0;
         window.addEventListener('scroll', () => {
@@ -726,52 +751,31 @@
             lastScroll = currentScroll;
         });
 
-        // Add parallax effect to hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        // No parallax or visual click ripple; neither is needed for navigation.
+    </script>
+    <script>
+    (() => {
+        const form = document.getElementById('mv-signup-form');
+        const fields = document.getElementById('mv-signup-fields');
+        const email = document.getElementById('mv-signup-email');
+        const consent = document.getElementById('mv-signup-consent');
+        const status = document.getElementById('mv-signup-status');
+        if (!form || !fields || !email || !consent || !status) return;
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            if (!email.validity.valid) {
+                status.textContent = 'Enter a valid email address for the preview.';
+                email.focus(); return;
             }
-        });
-
-        // Add click tracking for CTA buttons
-        document.querySelectorAll('.btn-primary').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                // Add ripple effect
-                const ripple = document.createElement('span');
-                ripple.style.cssText = `
-                    position: absolute;
-                    border-radius: 50%;
-                    background: rgba(255,255,255,0.6);
-                    transform: scale(0);
-                    animation: ripple 0.6s linear;
-                    left: ${e.offsetX}px;
-                    top: ${e.offsetY}px;
-                    width: 10px;
-                    height: 10px;
-                `;
-                
-                this.style.position = 'relative';
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-
-        // Add ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
+            if (!consent.checked) {
+                status.textContent = 'Select the consent checkbox to continue the preview.';
+                consent.focus(); return;
             }
-        `;
-        document.head.appendChild(style);
+            form.reset();
+            status.textContent = 'Signup is unavailable. Nothing was submitted or saved.';
+        });
+        fields.disabled = false;
+    })();
     </script>
 </body>
 </html>
